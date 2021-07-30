@@ -14,10 +14,14 @@ parser.add_argument("bytes", type=int)
 args = parser.parse_args()
 
 def sizeof_fmt(num, suffix='B'):
-    for unit in ['','Ki','Mi','Gi','Ti','Pi','Ei','Zi']:
+    for unit in ['', 'Ki', 'Mi', 'Gi', 'Ti', 'Pi', 'Ei', 'Zi']:
         if abs(num) < 1024.0:
-            return "%3.1f%s%s" % (num, unit, suffix)
+            if unit == '':
+                return f'{num} {unit}{suffix}'
+            return f'{num:.3f} {unit}{suffix}'
         num /= 1024.0
-    return "%.1f%s%s" % (num, 'Yi', suffix)
+    return f'{num:.3f} Yi{suffix}'
 
 print sizeof_fmt(args.bytes)
+
+
